@@ -6,11 +6,25 @@ import Axios from "axios"
 function App() {
   
   const [todos,setTodos] = useState('')
+  const [todoList, setTodoList] = useState([])
+  const [emptyInput, setEmptyInput] = useState("")
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/api/get').then((response) => {
+      setTodoList(response.data)
+    })
+  })
+  
 
   function submitTodo(){
     Axios.post('http://localhost:3001/api/insert', {
       todo: todos
     })
+
+    setTodoList([
+      ...todoList,
+      {todo: todos}
+    ])
   }
 
 
@@ -27,6 +41,15 @@ function App() {
         }}
         />
         <button onClick={submitTodo}>Submit</button>
+
+        {todoList.map((val) => {
+          return(
+            <div className="card">
+              <h3>{val.allTasks}</h3>
+            </div>
+          )
+        })}
+        
       </div>
     </div>
   );

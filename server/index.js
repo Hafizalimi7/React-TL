@@ -16,6 +16,7 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
+
 app.post("/api/insert", (req,res) => {
   const todo = req.body.todo
 
@@ -26,6 +27,13 @@ app.post("/api/insert", (req,res) => {
   })
 })
 
+
+app.get("/api/get", (req,res) => {
+  const sqlGet = "SELECT * FROM tasks;"
+  db.query(sqlGet, (err,result) => {
+    res.send(result)
+  })
+})
 
 app.listen(3001, () => {
   console.log('running on port 3001')
