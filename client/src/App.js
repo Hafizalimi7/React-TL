@@ -7,7 +7,7 @@ function App() {
   
   const [todos,setTodos] = useState('')
   const [todoList, setTodoList] = useState([])
-  const [emptyInput, setEmptyInput] = useState("")
+  
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/get').then((response) => {
