@@ -7,6 +7,8 @@ function App() {
   
   const [todos,setTodos] = useState('')
   const [todoList, setTodoList] = useState([])
+  const [todoComplete,setTodoComplete] = useState(false)
+  
   
 
   useEffect(() => {
@@ -26,6 +28,11 @@ function App() {
       {todo: todos}
     ])
   }
+  
+  function handleChange(){
+    setTodoComplete(!todoComplete)
+  };
+
 
 
   return (
@@ -44,7 +51,13 @@ function App() {
 
         {todoList.map((val) => {
           return(
-            <div className="card">
+            <div>
+               <input 
+               type="checkbox" 
+               checked={todoComplete}
+               onChange={handleChange}
+               />
+               Check me !
               <h3>{val.allTasks}</h3>
             </div>
           )
