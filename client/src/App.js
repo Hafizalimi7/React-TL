@@ -5,7 +5,7 @@ import Axios from "axios"
 
 function App() {
   
-  const [todos,setTodos] = useState('')
+  const [todos,setTodos] = useState([])
   const [todoList, setTodoList] = useState([])
   const [todoComplete,setTodoComplete] = useState(false)
   
@@ -28,16 +28,19 @@ function App() {
       {todo: todos}
     ])
   }
-  
-  function handleChange(){
-    setTodoComplete(!todoComplete)
-  };
 
+  function handleChecked(){
+    setTodoComplete(!todoComplete)
+    console.log(todoComplete)
+  }
+
+  function deleteTodo(item){
+    Axios.delete(`http://localhost:3001/api/delete/${item}`)
+}
 
 
   return (
-    <div className="App">
-      <div className="form">
+    <div>
       <h1>To Do List</h1>
         <input 
         className="form input" 
@@ -47,24 +50,30 @@ function App() {
           setTodos(e.target.value)
         }}
         />
+
         <button onClick={submitTodo}>Submit</button>
+        {/* <button onClick={(e) => {deleteTodo(e.allTasks)}}>Clear Completed</button> */}
+
+       
 
         {todoList.map((val) => {
           return(
             <div>
                <input 
                type="checkbox" 
-               checked={todoComplete}
-               onChange={handleChange}
+               defaultChecked={todoComplete}
+               onChange={handleChecked}
                />
-               Check me !
-              <h3>{val.allTasks}</h3>
+               {val.allTasks}
+               <button onClick={() => {deleteTodo(val.allTasks)}}>Clear Completed</button>
+              
+              
             </div>
           )
         })}
         
       </div>
-    </div>
+    
   );
 }
 

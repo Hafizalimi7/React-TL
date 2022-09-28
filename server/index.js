@@ -35,6 +35,17 @@ app.get("/api/get", (req,res) => {
   })
 })
 
+app.delete("api/delete/allTasks", (req,res) => {
+  const todo = req.params.allTasks
+
+  const sql =
+   "DELETE FROM tasks WHERE allTasks = ?;"
+  db.query(sql, todo, (err,result) => {
+    console.log(err)
+    console.log(`number of item removed from the database ${result.affectedRows}`)
+  })
+})
+
 app.listen(3001, () => {
   console.log('running on port 3001')
 })
