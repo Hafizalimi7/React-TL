@@ -35,7 +35,7 @@ app.get("/api/get", (req,res) => {
   })
 })
 
-app.delete("api/delete/allTasks", (req,res) => {
+app.delete("/api/delete/:allTasks", (req,res) => {
   const todo = req.params.allTasks
 
   const sql =

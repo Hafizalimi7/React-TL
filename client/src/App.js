@@ -34,9 +34,12 @@ function App() {
     console.log(todoComplete)
   }
 
-  function deleteTodo(item){
-    Axios.delete(`http://localhost:3001/api/delete/${item}`)
-}
+  function deleteTodo(task){
+    Axios.delete(`http://localhost:3001/api/delete/${task}`, {
+      todo: todos
+    })
+    console.log(task)
+  }
 
 
   return (
@@ -52,11 +55,11 @@ function App() {
         />
 
         <button onClick={submitTodo}>Submit</button>
-        {/* <button onClick={(e) => {deleteTodo(e.allTasks)}}>Clear Completed</button> */}
-
-       
-
+        
+        
+        
         {todoList.map((val) => {
+          
           return(
             <div>
                <input 
@@ -65,15 +68,13 @@ function App() {
                onChange={handleChecked}
                />
                {val.allTasks}
-               <button onClick={() => {deleteTodo(val.allTasks)}}>Clear Completed</button>
-              
-              
+               <button onClick={() => {deleteTodo(val.allTasks)}}>Done</button>
             </div>
+            
           )
-        })}
-        
-      </div>
-    
+        })
+      }
+    </div>
   );
 }
 
