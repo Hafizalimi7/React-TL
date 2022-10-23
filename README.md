@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Installation
 Clone the repo to the machine:  
 ```
-git clone ...
+git clone https://github.com/Hafizalimi7/React-TL.git
 ```
 
 ## Available Scripts
